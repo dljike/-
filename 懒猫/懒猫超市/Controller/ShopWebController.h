@@ -12,6 +12,7 @@
 
 
 @property (nonatomic, retain) NSString *webUrl;
+@property (nonatomic, retain) NSString *titleName;
 
 
 

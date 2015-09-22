@@ -131,6 +131,7 @@
 		C6B0F5271BAAA88900946264 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B0F5251BAAA88900946264 /* AMapSearchKit.framework */; };
 		C6BBBCC71BA6BD3100266B9F /* FourButtonWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BBBCC61BA6BD3100266B9F /* FourButtonWebViewController.m */; };
 		C6BBBCCB1BA6C90900266B9F /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BBBCCA1BA6C90900266B9F /* UINavigationController+SGProgress.m */; };
+		C6E8C74D1BB0F60700AF89DD /* shopcar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6E8C74C1BB0F60700AF89DD /* shopcar.png */; };
 		C6EE04C61BAFEAE100A41C16 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EE04C51BAFEAE100A41C16 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
@@ -344,6 +345,7 @@
 		C6BBBCC61BA6BD3100266B9F /* FourButtonWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourButtonWebViewController.m; sourceTree = "<group>"; };
 		C6BBBCC91BA6C90900266B9F /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
 		C6BBBCCA1BA6C90900266B9F /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
+		C6E8C74C1BB0F60700AF89DD /* shopcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopcar.png; sourceTree = "<group>"; };
 		C6EE04C41BAFEAE100A41C16 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C6EE04C51BAFEAE100A41C16 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -677,6 +679,7 @@
 		C68383D41BA28A6C00C8AB6C /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				C6E8C74C1BB0F60700AF89DD /* shopcar.png */,
 				C65ECAAF1BA9544600C90792 /* regist.png */,
 				C65ECAA81BA941DB00C90792 /* login.png */,
 				C65ECAAD1BA94B2000C90792 /* close.png */,
@@ -1013,6 +1016,7 @@
 				C68383E31BA2A0DA00C8AB6C /* index.png in Resources */,
 				C60BD69F1BA3F8D500C3CED0 /* subtraction.png in Resources */,
 				C6655D641BA7B95E002FE780 /* logo.png in Resources */,
+				C6E8C74D1BB0F60700AF89DD /* shopcar.png in Resources */,
 				C6655D941BA7CC85002FE780 /* myattention.png in Resources */,
 				C683838A1BA27DD900C8AB6C /* Main.storyboard in Resources */,
 				C683838F1BA27DD900C8AB6C /* LaunchScreen.xib in Resources */,

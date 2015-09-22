@@ -75,14 +75,6 @@
     }];
 
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    NSInteger selected = 0;
-    NSIndexPath *selectedIndex = [NSIndexPath indexPathForRow:selected inSection:0];
-    [self.tableVew selectRowAtIndexPath:selectedIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
-    [super viewDidAppear:animated];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,6 +82,11 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO; // 导航不透明
     self.navigationItem.title = @"懒猫超市";
+    
+    // 隐藏返回按钮
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:nil target:self action:nil];
+    self.tabBarController.selectedIndex = 1;
+    
     // 左边view
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, SCREEN_HEIGHT)];
     leftView.backgroundColor = [UIColor colorWithRed:242 / 255.0 green:243 / 255.0 blue:247 / 255.0 alpha:1];;
@@ -223,11 +220,10 @@
     // 选中背景颜色
     leftCell.selectedBackgroundView = [[UIView alloc] initWithFrame:leftCell.frame];
     leftCell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
-    leftCell.leftView.tag = indexPath.row;
+    leftCell.leftView.tag = indexPath.row + 1;
+  
     leftCell.leftView.hidden = YES;
-    if (indexPath.item == 0) {
-        leftCell.leftView.backgroundColor = [UIColor orangeColor];
-    }
+
     // 选中后的字体颜色
     leftCell.titleLable.highlightedTextColor = [UIColor orangeColor];
     leftCell.titleLable.text = [NSString stringWithFormat:@"%@",[self.leftdataArr[indexPath.item] objectForKey:@"categoryName"]];
@@ -238,17 +234,22 @@
 #pragma mark - tableView点击方法
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    LeftTableCell *left = [[LeftTableCell alloc] init];
-    UIView *v = (UIView *)[self.view viewWithTag:indexPath.row];
+#warning 左边view的隐显
+    UIView *v = (UIView *)[self.view viewWithTag:indexPath.row + 1];
     v.hidden = NO;
+
     if (self.tempHidden != 0) {
+       
         UIView *v = (UIView *)[self.view viewWithTag:self.tempHidden];
-        v.hidden = YES;
+            v.hidden = YES;
+        
     }else{
-        UIView *v = (UIView *)[self.view viewWithTag:0];
+        UIView *v = (UIView *)[self.view viewWithTag:indexPath.row + 1];
         v.hidden = NO;
+        
     }
-        self.tempHidden = indexPath.row;
+    self.tempHidden = indexPath.row + 1;
+   
     
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
@@ -289,11 +290,6 @@
     
 }
 
-#warning 获取collecView数据
-- (void)getCollectionData
-{
-    
-}
 
 
 ////===================================Collection===============================================
@@ -387,6 +383,8 @@
     NSLog(@"%ld",indexPath.item);
     
     ShopWebController *shopWeb = [[ShopWebController alloc] init];
+    shopWeb.titleName = [self.rightdataArr[indexPath.item] objectForKey:@"name"];
+    
     shopWeb.webUrl = [self.rightdataArr[indexPath.item] objectForKey:@"url"];
     
     [self.navigationController pushViewController:shopWeb animated:YES];

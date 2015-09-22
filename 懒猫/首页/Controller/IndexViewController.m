@@ -20,6 +20,7 @@
 #import "UIImageView+WebCache.h"
 #import "FourButtonWebViewController.h"
 #import "ShopCarViewController.h"
+#import "ShopWebController.h"
 
 @interface IndexViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
@@ -583,9 +584,9 @@
     
     if (indexPath.section == 2) {
         
-        FourButtonWebViewController *saleWeb = [[FourButtonWebViewController alloc] init];
+        ShopWebController *saleWeb = [[ShopWebController alloc] init];
         saleWeb.webUrl = [self.products[indexPath.item] objectForKey:@"url"];
-    
+        saleWeb.titleName = [self.products[indexPath.item] objectForKey:@"name"];
         [self.navigationController pushViewController:saleWeb animated:YES];
 
         

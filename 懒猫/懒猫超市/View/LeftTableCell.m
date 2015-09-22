@@ -30,7 +30,7 @@
 {
     [super layoutSubviews];
     
-    self.titleLable.frame = CGRectMake(0, 0, 120, 50);
+    self.titleLable.frame = CGRectMake(0, 0, 115, 50);
     self.titleLable.textAlignment = NSTextAlignmentCenter;
     self.titleLable.textColor = [UIColor blackColor];
 //    self.textLabel.text = @"aaafdf";
