@@ -27,7 +27,7 @@
 {
     // 获取documents路径
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSLog(@"----------%@",path);
+//    NSLog(@"----------%@",path);
     
     // 拼接数据库路径
     NSString *dbPath = [path stringByAppendingPathComponent:@"person.db"];
@@ -51,7 +51,7 @@
 #warning 创建表
 -(void)createTable
 {
-    NSString *createSQL = @"create table if not exists person (name text, age integer, num integer primary key autoincrement)";
+    NSString *createSQL = @"create table if not exists person (name text, longitude text,latitude text,titleName text, num integer primary key autoincrement)";
     
     int result = sqlite3_exec(dbPoint, createSQL.UTF8String, NULL, NULL, NULL);
     
@@ -61,7 +61,7 @@
 #warning 插入
 -(void)insertInfo:(MyMessage *)message
 {
-    NSString *insertSQL = [NSString stringWithFormat:@"insert into person (name, age) values ('%@','%ld')",message.name,message.age];
+    NSString *insertSQL = [NSString stringWithFormat:@"insert into person (name, longitude, latitude,titleName) values ('%@','%@','%@','%@')",message.name,message.longitude,message.latitude,message.titleName];
     
     int result = sqlite3_exec(dbPoint, insertSQL.UTF8String, NULL, NULL, NULL);
     
@@ -71,7 +71,7 @@
 #warning 删除
 -(void)deleteInfo:(NSString *)name
 {
-    NSString *deleteSQL = [NSString stringWithFormat:@"delete from person where num = '%@'",name];
+    NSString *deleteSQL = [NSString stringWithFormat:@"delete from person where name = '%@'",name];
     
     int result = sqlite3_exec(dbPoint, deleteSQL.UTF8String, NULL, NULL, NULL);
     
@@ -83,7 +83,7 @@
 -(void)updataInfo:(MyMessage *)message
 {
     // 1. 创建sql语句
-    NSString *updateSQL = [NSString stringWithFormat:@"update person set name = '%@',age = '%ld' where num = '%@'",message.name,message.age,message.name];
+    NSString *updateSQL = [NSString stringWithFormat:@"update person set name = '%@',longitude = '%@',latitude = '%@',titleName = '%@' where num = '%ld'",message.name,message.longitude,message.latitude,message.titleName,message.num];
     
     // 2. 执行
     int result = sqlite3_exec(dbPoint, updateSQL.UTF8String, NULL, NULL, NULL);
@@ -116,14 +116,19 @@
             // 逐行获取每一列信息
             // 列数 从0开始
             const unsigned char *name = sqlite3_column_text(stmt, 0);
-            int age = sqlite3_column_int(stmt, 1);
-            int num = sqlite3_column_int(stmt, 2);
+            const unsigned char *longitude = sqlite3_column_text(stmt, 1);
+            const unsigned char *latitude = sqlite3_column_text(stmt, 2);
+            const unsigned char *titleName = sqlite3_column_text(stmt, 3);
+            int num = sqlite3_column_int(stmt, 4);
+           
             
             // 把获取到的数据信息保存在model中
             MyMessage *temp = [[MyMessage alloc]init];
             temp.name = [NSString stringWithUTF8String:(const char *)name];
-            temp.age = age;
-            
+            temp.longitude = [NSString stringWithUTF8String:(const char *)longitude];
+            temp.latitude = [NSString stringWithUTF8String:(const char *)latitude];
+            temp.titleName = [NSString stringWithUTF8String:(const char *)titleName];
+            temp.num = num;
             // 添加到数组中
             [arr addObject:temp];
             

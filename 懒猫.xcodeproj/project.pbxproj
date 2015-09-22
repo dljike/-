@@ -132,6 +132,7 @@
 		C6BBBCC71BA6BD3100266B9F /* FourButtonWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BBBCC61BA6BD3100266B9F /* FourButtonWebViewController.m */; };
 		C6BBBCCB1BA6C90900266B9F /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BBBCCA1BA6C90900266B9F /* UINavigationController+SGProgress.m */; };
 		C6E8C74D1BB0F60700AF89DD /* shopcar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6E8C74C1BB0F60700AF89DD /* shopcar.png */; };
+		C6E8C7571BB123CD00AF89DD /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = C6E8C7561BB123CD00AF89DD /* share.png */; };
 		C6EE04C61BAFEAE100A41C16 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EE04C51BAFEAE100A41C16 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
@@ -346,6 +347,7 @@
 		C6BBBCC91BA6C90900266B9F /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
 		C6BBBCCA1BA6C90900266B9F /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		C6E8C74C1BB0F60700AF89DD /* shopcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopcar.png; sourceTree = "<group>"; };
+		C6E8C7561BB123CD00AF89DD /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		C6EE04C41BAFEAE100A41C16 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C6EE04C51BAFEAE100A41C16 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -679,6 +681,7 @@
 		C68383D41BA28A6C00C8AB6C /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				C6E8C7561BB123CD00AF89DD /* share.png */,
 				C6E8C74C1BB0F60700AF89DD /* shopcar.png */,
 				C65ECAAF1BA9544600C90792 /* regist.png */,
 				C65ECAA81BA941DB00C90792 /* login.png */,
@@ -998,6 +1001,7 @@
 				C6655D601BA7B5ED002FE780 /* shezhi.png in Resources */,
 				C60BD69D1BA3F82A00C3CED0 /* addition.png in Resources */,
 				C60BD68D1BA3D22D00C3CED0 /* jifen.png in Resources */,
+				C6E8C7571BB123CD00AF89DD /* share.png in Resources */,
 				C6655D5E1BA7B566002FE780 /* yqhy.png in Resources */,
 				C6655D6E1BA7BD91002FE780 /* my.png in Resources */,
 				C65ECAB01BA9544600C90792 /* regist.png in Resources */,

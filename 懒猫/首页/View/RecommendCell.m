@@ -52,6 +52,9 @@
 
 -(void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
 {
+//    NSLog(@"=====%f",layoutAttributes.size.height); // 250
+//    NSLog(@"====%f",layoutAttributes.size.width);   // 172.5
+    
     self.imgView.frame = CGRectMake(0, 0, layoutAttributes.size.width, layoutAttributes.size.height - 80);
     
     self.titleLable.frame = CGRectMake(5, layoutAttributes.size.height - 75, layoutAttributes.size.width, 20);

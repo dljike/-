@@ -34,7 +34,18 @@
     [self.navigationController showSGProgressWithDuration:3]; // 进度条
 
     self.navigationItem.title = self.titleName;
+    // 导航右边搜索按钮
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 40)];
+    rightButton.backgroundColor = [UIColor whiteColor];
+    rightButton.adjustsImageWhenHighlighted = NO;
+    [rightButton addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [self.view addSubview:rightButton];
     
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+
+
     self.countNum = @"0";
     
     // 导航栏返回按钮
@@ -127,6 +138,13 @@
     
     
 }
+
+#warning 分享按钮
+-(void)shareAction
+{
+    
+}
+
 
 #warning 加号方法
 -(void)additionAction

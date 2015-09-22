@@ -21,6 +21,8 @@
 #import "FourButtonWebViewController.h"
 #import "ShopCarViewController.h"
 #import "ShopWebController.h"
+#import "DataBase.h"
+
 
 @interface IndexViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
@@ -88,13 +90,34 @@
     // x: 经度 y: 纬度
 //    NSString *x = @"121.160695000000000";
 //    NSString *y = @"31.298032000000000";
-    
     self.longitude = [noti.userInfo objectForKey:@"x"]; // 经度
     self.latitude = [noti.userInfo objectForKey:@"y"]; // 纬度
+    NSString *user = [noti.userInfo objectForKey:@"shopuser"];
+
+// =========================数据库================================
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+    [data createTable];
+    MyMessage *myMessage = [[MyMessage alloc] init];
+    myMessage.name = user;
+    myMessage.longitude = self.longitude;
+    myMessage.latitude = self.latitude;
+    myMessage.titleName = [NSString stringWithFormat:@"%@ ▾",[noti.userInfo objectForKey:@"name"]];
+    [data insertInfo:myMessage];
+    
+//    // 查询数据
+//    NSArray *arr = [data selectInfo];
+//    MyMessage *m = (MyMessage *) arr.lastObject;
+////    NSLog(@"=======%@",arr);
+////    for (MyMessage *m in arr) {
+//        NSLog(@"------%@,%@,%@",m.name,m.longitude,m.latitude);
+////    }
+//    
+
+    
     
 #warning 获取传过来的社长商品推荐信息
 //    NSString *user = @"dl_wzxiang";  //18616721356
-    NSString *user = [noti.userInfo objectForKey:@"shopuser"];
     
     NSString *url = [NSString stringWithFormat:@"%@control=LCatCommon&action=Index&shopuser=%@&x=%@&y=%@&username=&sign=",self.mainURL,user,self.longitude,self.latitude];
 //    NSLog(@"=============%@",url);
@@ -116,9 +139,6 @@
     
     
 }
-
-
-
 
 //=======================================================
 
@@ -187,15 +207,24 @@
 //    self.cellNumArr = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4", nil];
 //    NSLog(@"-----arr---%@",self.cellNumArr);
     // 给数组赋值
-    
 // http://mtest.ivpin.com//WPT-OpenAPI?control=LCatCommon&action=Index&shopuser =18616721356&x=121.160695000000000&y=31&y=31.298032000000000&username=&sign=
     
-    
     // x: 经度 y: 纬度
-    NSString *x = @"121.160695000000000";
-    NSString *y = @"31.298032000000000";
-    NSString *user = @"dl_wzxiang";  //18616721356
-    NSString *url = [NSString stringWithFormat:@"%@control=LCatCommon&action=Index&shopuser=%@&x=%@&y=%@&username=&sign=",self.mainURL,user,x,y];
+//    NSString *x = @"121.160695000000000";
+//    NSString *y = @"31.298032000000000";
+//    NSString *user = @"dl_wzxiang";  //18616721356
+// ================== 获取数据库信息 ========================
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+//    [data createTable];
+        // 查询数据
+        NSArray *arr = [data selectInfo];
+        MyMessage *m = (MyMessage *) arr.lastObject;
+    
+    self.navLable.text =  m.titleName; // 导航栏文字
+    
+    NSString *url = [NSString stringWithFormat:@"%@control=LCatCommon&action=Index&shopuser=%@&x=%@&y=%@&username=&sign=",self.mainURL,m.name,m.longitude,m.latitude];
+//    NSLog(@"======%@",url);
     [AFNetworkHandler GETWithAFNByURL:url completion:^(id result) {
         
         self.dataDic = [NSMutableDictionary dictionary];
@@ -216,9 +245,7 @@
         
         self.numArr = [NSMutableArray array];
         for (int i = 0; i < self.products.count; i++) { // 2是cell的个数
-            
             [self.numArr addObject:@"0"];
-            
         }
         
         [self.collection reloadData];

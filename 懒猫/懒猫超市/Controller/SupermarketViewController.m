@@ -14,7 +14,7 @@
 #import "ShopWebController.h"
 #import "LeftTableCell.h"
 #import "MBProgressHUD.h"
-
+#import "DataBase.h"
 
 @interface SupermarketViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -50,15 +50,20 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
 #warning 加载左边视图数据
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    
+//    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+    //    [data createTable];
+    // 查询数据
+    NSArray *arr = [data selectInfo];
+    MyMessage *m = (MyMessage *) arr.lastObject;
     
-    //    NSLog(@"~~~~~~~~~~~~~~%@",[data objectForKey:@"name"]);
+    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatCategory&shopuser=%@",m.name];
     
-    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatCategory&shopuser=%@",[data objectForKey:@"name"]];
-    
-    //    NSLog(@"========%@",url);
+//        NSLog(@"========%@",url);
     [AFNetworkHandler GETWithAFNByURL:url completion:^(id result) {
         
         NSDictionary *tempDic = [NSDictionary dictionary];
@@ -86,6 +91,7 @@
     // 隐藏返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:nil target:self action:nil];
     self.tabBarController.selectedIndex = 1;
+    
     
     // 左边view
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, SCREEN_HEIGHT)];
@@ -133,7 +139,7 @@
     [self.collectionView registerClass:[RightCollectionCell class] forCellWithReuseIdentifier:@"collCell"];
     // 注册头部区域
     [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-    
+    [self getData];
 }
 #pragma mark - 获取数据
 - (void)getData
@@ -141,12 +147,18 @@
 //    http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatCategory&shopuser=dl_lwgang
    
 // ==================================商品种类数据===============================================
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    
+//    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    
-    
-    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatCategory&shopuser=%@",[data objectForKey:@"name"]];
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+    //    [data createTable];
+    // 查询数据
+    NSArray *arr = [data selectInfo];
+    MyMessage *m = (MyMessage *) arr.lastObject;
+
+    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatCategory&shopuser=%@",m.name];
     
     [AFNetworkHandler GETWithAFNByURL:url completion:^(id result) {
         
@@ -166,14 +178,22 @@
 - (void)getRightData
 {
     
-    NSString *pathList = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
-    NSMutableDictionary *dataList = [[NSMutableDictionary alloc] initWithContentsOfFile:pathList];
+//    NSString *pathList = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    NSMutableDictionary *dataList = [[NSMutableDictionary alloc] initWithContentsOfFile:pathList];
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+    //    [data createTable];
+    // 查询数据
+    NSArray *arr = [data selectInfo];
+    MyMessage *m = (MyMessage *) arr.lastObject;
+    
+    
     if (self.leftdataArr.count < 1) {
         UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"提示" message:@"超市为空" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         [aler show];
         
     }else{
-    NSString *righturl = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatProductListByCategoryID&shopuser=%@&categoryid=%@&pageindex=1&pagesize=20",[dataList objectForKey:@"name"],[self.leftdataArr[0] objectForKey:@"categoryID"]];
+    NSString *righturl = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatProductListByCategoryID&shopuser=%@&categoryid=%@&pageindex=1&pagesize=20",m.name,[self.leftdataArr[0] objectForKey:@"categoryID"]];
 
     //    NSLog(@"~~~~~~~~%@",url);
     [AFNetworkHandler GETWithAFNByURL:righturl completion:^(id result) {
@@ -252,13 +272,20 @@
    
     
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
-    
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"];
+//    
+//    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
     //    NSLog(@"~~~~~~~~~~~~~~%@",[data objectForKey:@"name"]);
     
-    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatProductListByCategoryID&shopuser=%@&categoryid=%@&pageindex=1&pagesize=20",[data objectForKey:@"name"],[self.leftdataArr[indexPath.item] objectForKey:@"categoryID"]];
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+    //    [data createTable];
+    // 查询数据
+    NSArray *arr = [data selectInfo];
+    MyMessage *m = (MyMessage *) arr.lastObject;
+
+    NSString *url = [NSString stringWithFormat:@"http://mtest.ivpin.com//WPT-OpenAPI?control=LCatShop&action=getLcatProductListByCategoryID&shopuser=%@&categoryid=%@&pageindex=1&pagesize=20",m.name,[self.leftdataArr[indexPath.item] objectForKey:@"categoryID"]];
     
 //    NSLog(@"~~~~~~~~%@",url);
     [AFNetworkHandler GETWithAFNByURL:url completion:^(id result) {

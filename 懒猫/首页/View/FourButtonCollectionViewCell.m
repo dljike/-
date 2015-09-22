@@ -7,6 +7,7 @@
 //
 
 #import "FourButtonCollectionViewCell.h"
+#import "Base.h"
 
 @implementation FourButtonCollectionViewCell
 
@@ -43,43 +44,43 @@
 
 -(void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
 {
-    self.redPacket.frame = CGRectMake(20, 10, 50, 50);
+    self.redPacket.frame = CGRectMake(SCREEN_WIDTH * 0.053, 10, 50, 50);
     self.redPacket.layer.cornerRadius = 25;
     self.redPacket.clipsToBounds = YES;
     self.redPacket.backgroundColor = [UIColor whiteColor];
     [self.redPacket setImage:[UIImage imageNamed:@"hongbao"] forState:UIControlStateNormal];
-    self.redPacketLable.frame = CGRectMake(10, 60, 70, 20);
+    self.redPacketLable.frame = CGRectMake(SCREEN_WIDTH * 0.026, 60, 70, 20);
     self.redPacketLable.textAlignment = NSTextAlignmentCenter;
     self.redPacketLable.text = @"抢红包";
     self.redPacketLable.font = [UIFont fontWithName:nil size:14];
     
-    self.score.frame = CGRectMake(110, 10, 50, 50);
+    self.score.frame = CGRectMake(SCREEN_WIDTH * 0.293, 10, 50, 50);
     self.score.layer.cornerRadius = 25;
     self.score.clipsToBounds = YES;
     self.score.backgroundColor = [UIColor whiteColor];
     [self.score setImage:[UIImage imageNamed:@"jifen"] forState:UIControlStateNormal];
-    self.scoreLable.frame = CGRectMake(100, 60, 70, 20);
+    self.scoreLable.frame = CGRectMake(SCREEN_WIDTH * 0.266, 60, 70, 20);
     self.scoreLable.textAlignment = NSTextAlignmentCenter;
     self.scoreLable.text = @"积分兑换";
     self.scoreLable.font = [UIFont fontWithName:nil size:14];
     
-    self.sale.frame = CGRectMake(200, 10, 50, 50);
+    self.sale.frame = CGRectMake(SCREEN_WIDTH * 0.533, 10, 50, 50);
     self.sale.layer.cornerRadius = 25;
     self.sale.clipsToBounds = YES;
     self.sale.backgroundColor = [UIColor whiteColor];
     [self.sale setImage:[UIImage imageNamed:@"cuxiao"] forState:UIControlStateNormal];
-    self.saleLable.frame = CGRectMake(190, 60, 70, 20);
+    self.saleLable.frame = CGRectMake(SCREEN_WIDTH * 0.506, 60, 70, 20);
     self.saleLable.textAlignment = NSTextAlignmentCenter;
     self.saleLable.text = @"促销";
     self.saleLable.font = [UIFont fontWithName:nil size:14];
     
     
-    self.supermarket.frame = CGRectMake(290, 10, 50, 50);
+    self.supermarket.frame = CGRectMake(SCREEN_WIDTH * 0.773, 10, 50, 50);
     self.supermarket.layer.cornerRadius = 25;
     self.supermarket.clipsToBounds = YES;
     self.supermarket.backgroundColor = [UIColor whiteColor];
     [self.supermarket setImage:[UIImage imageNamed:@"lmmark"] forState:UIControlStateNormal];
-    self.supermarketLable.frame = CGRectMake(280, 60, 70, 20);
+    self.supermarketLable.frame = CGRectMake(SCREEN_WIDTH * 0.746, 60, 70, 20);
     self.supermarketLable.textAlignment = NSTextAlignmentCenter;
     self.supermarketLable.text = @"懒猫超市";
     self.supermarketLable.font = [UIFont fontWithName:nil size:14];

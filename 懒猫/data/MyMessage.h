@@ -11,8 +11,9 @@
 @interface MyMessage : NSObject
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, assign) NSInteger age;
-
-
+@property (nonatomic, retain) NSString *longitude;// 经度
+@property (nonatomic, retain) NSString *latitude; // 纬度
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, retain) NSString *titleName;
 
 @end

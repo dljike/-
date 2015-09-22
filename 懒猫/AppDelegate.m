@@ -14,6 +14,8 @@
 #import "LifeViewController.h"
 #import "MyViewController.h"
 #import "ChoosePresidentViewController.h"
+#import "DataBase.h"
+
 
 @interface AppDelegate ()<UITabBarControllerDelegate>
 
@@ -33,20 +35,14 @@
     UITabBarController *tabBar = [[UITabBarController alloc]init];
     tabBar.tabBar.backgroundColor = [UIColor whiteColor];
     tabBar.tabBar.barTintColor = [UIColor whiteColor];
-//    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    //获取完整路径
-//    
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    
-//    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];
-//    NSLog(@"%@",plistPath);
-//    NSMutableDictionary *dictplist = [[NSMutableDictionary alloc ] init];
-//    [dictplist writeToFile:plistPath atomically:YES];
-//    NSLog(@"===============%@",dictplist);
-//        if ((NSNull *)dictplist == [NSNull null]) {
-//           [dictplist setObject:@"张三" forKey:@"name"];
-//            
+
+    DataBase *data = [[DataBase alloc] init];
+    [data openDB];
+        [data createTable];
+    // 查询数据
+    NSArray *arr = [data selectInfo];
+
+//        if (arr.count < 1) {
 //        ChoosePresidentViewController *choose = [[ChoosePresidentViewController alloc] init];
 //        self.indexNvc = [[UINavigationController alloc] initWithRootViewController:choose];
 //        
