@@ -522,8 +522,7 @@
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"collectNum" object:[UIColor redColor] userInfo:@{@"num":strNum,@"type":@"type"}];
     
-    
-    
+
     [self.collection reloadData];
   
 }
